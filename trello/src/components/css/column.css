@@ -1,0 +1,28 @@
+.column{
+    color: #457f8d;
+    background: #d6fae0;
+}
+
+.title{
+    background: #b6f3c7;
+    float: left;
+    /* height: 45px; */
+    padding: 15px;
+    text-align: center;
+    width: 75%;	
+}
+.column-width{
+    width: 200px;
+}
+
+.delete-card{
+    margin: 15px;
+    float: right;
+}
+.rename-column-title{
+    margin: 15px;
+    float: right;
+}
+.add-card-form{
+    margin: 0px;
+}

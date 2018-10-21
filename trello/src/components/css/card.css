@@ -1,0 +1,9 @@
+.card{
+    background: #abe1c7;
+    float: left;
+    /* height: 45px; */
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    width: 65%;	
+}

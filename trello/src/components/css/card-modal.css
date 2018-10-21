@@ -1,0 +1,62 @@
+
+.title-card{
+    background: #b6f3c7;
+    float: left;
+    /* height: 80px; */
+    padding: 15px;
+    text-align: center;
+    width: 100%;	
+}
+.background{
+    background: #d6fae0;
+}
+.rename-title-button{
+    margin: 6px;
+    float: right;
+}
+.rename-title-form{
+    float: left;
+    margin-left: 10px;
+    width: 60%;
+}
+.description-form{
+    width: 50%;
+    margin-bottom: 0;
+}
+.description-button{
+    width: 50%;
+    margin-bottom: 10px;
+}
+.description{
+    width: 50%;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+.comments{
+    width: 50%;
+}
+.comments-title{
+    margin-bottom: 20px;
+}
+.comments-form{
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+.comments-button{
+    width: 100%;
+}
+.comment{
+    margin-top: 10px;
+}
+.comment-button{
+    width: 50%;
+}
+.right-card{
+    float: right;
+    width: 45%;
+}
+.right-card-text{
+    background: #b6f3c7;
+    padding: 15px;
+    margin: 15px;
+}
