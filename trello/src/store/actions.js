@@ -1,8 +1,8 @@
 import { bindActionCreators } from 'redux'
 
-export const ADD_COLUMNS = 'CHANGE_COLUMNS'
-export const RENAME_COLUMNS = 'CHANGE_COLUMNS'
-export const DELETE_COLUMNS = 'CHANGE_COLUMNS'
+export const ADD_COLUMNS = 'ADD_COLUMNS'
+export const RENAME_COLUMNS = 'RENAME_COLUMNS'
+export const DELETE_COLUMNS = 'DELETE_COLUMNS'
 
 export const ADD_NEW_CARD = 'ADD_NEW_CARD'
 export const RENAME_CARD = 'RENAME_CARD'
@@ -18,10 +18,10 @@ export const ADD_LOGIN = 'ADD_LOGIN'
 
 
 
-export const CHANGE_CARDS = 'CHANGE_CARDS'
+/* export const CHANGE_CARDS = 'CHANGE_CARDS'
 export const CHANGE_CARD_DESCRIPTION = 'CHANGE_CARD_DESCRIPTION'
 export const CHANGE_CARD_COMMENTS = 'CHANGE_CARD_COMMENTS'
-export const CHANGE_LOGIN_OBJ = 'CHANGE_LOGIN_OBJ'
+export const CHANGE_LOGIN_OBJ = 'CHANGE_LOGIN_OBJ' */
 
 export const addColumns = (columns) => {
     return {
@@ -103,7 +103,7 @@ export const addLogin = (login) => {
 
 
 
-export const changeCards = (cards) => {
+/* export const changeCards = (cards) => {
     let serialObj = JSON.stringify(cards);
     localStorage.setItem('cards', serialObj);
     return {
@@ -134,14 +134,13 @@ export const changeLoginObj = (loginObj) => {
         type: CHANGE_LOGIN_OBJ,
         payload: loginObj
     }
-}
+} */
 
 
-export const stateToProps = (state) =>{
+ /* export const stateToProps = (state) =>{
     return {
         columns: state.columns,
         cards: state.cards,
-        cardDescription: state.cardDescription,
         cardComments: state.cardComments,
         loginObj: state.loginObj
     }
@@ -161,6 +160,6 @@ export const dispatchToProps = (dispatch) => {
         changeComment: bindActionCreators(changeComment, dispatch),
         deleteComment: bindActionCreators(deleteComment, dispatch),
 
-        addLogin: bindActionCreators(changeCards, dispatch)
+        addLogin: bindActionCreators(addLogin, dispatch)
     }
-}
+}  */

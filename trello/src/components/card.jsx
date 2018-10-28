@@ -3,6 +3,10 @@ import './css/card.css';
 import CardModal from './card-modal'
 import {Button} from 'react-bootstrap'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { deleteCard } from '../store/actions'
+
 class Card extends React.Component{
     
     state={
@@ -30,7 +34,7 @@ class Card extends React.Component{
     }
 
     render(){
-        const { cardName, cardId, cardLogin, cardIndex, cardDescription, cardComments,nameColumn } = this.props
+        const { cardName, cardId, cardLogin, cardIndex, cardDescription, nameColumn } = this.props
         const { show } = this.state
         if (cardName){
         return(
@@ -39,20 +43,13 @@ class Card extends React.Component{
                 <Button bsSize="xsmall" bsStyle="danger" className="delete-card" onClick={this.handleDeleteCard}>X</Button>
                 <CardModal 
                     cardDescription={cardDescription}
-                    cardComments={cardComments}
                     cardId={cardId}
                     cardLogin={cardLogin}
                     cardIndex={cardIndex}
                     show={show} 
                     cardName={cardName}
                     nameColumn={nameColumn}
-                    login={this.props.login}
                     handleClose={this.handleClose}
-                    onRenameCardTitle={this.props.onRenameCardTitle}
-                    onChangeCardDescription={this.props.onChangeCardDescription}
-                    onAddComment={this.props.onAddComment}
-                    onRemoveComment={this.props.onRemoveComment}
-                    onChangeComment={this.props.onChangeComment}
                 /> 
             </div>
         )
@@ -61,4 +58,14 @@ class Card extends React.Component{
     }
 
 }
-export default Card;
+export const stateToProps = (state) =>{
+    return {
+        cardsState: state.cardReducer
+    }
+}
+export const dispatchToProps = (dispatch) => {
+    return {
+        deleteCard: bindActionCreators(deleteCard, dispatch)
+    }
+}
+export default connect(stateToProps, dispatchToProps)(Card)

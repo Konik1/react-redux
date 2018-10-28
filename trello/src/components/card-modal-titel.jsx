@@ -1,6 +1,10 @@
 import React from 'react'
 import {Button, FormGroup, FormControl} from 'react-bootstrap'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { renameCard } from '../store/actions'
+
 class CardModalTitel extends React.Component{
 
     state={
@@ -52,4 +56,14 @@ class CardModalTitel extends React.Component{
         )
     }
 }
-export default CardModalTitel;
+export const stateToProps = (state) =>{
+    return {
+        cardsState: state.cardReducer
+    }
+}
+export const dispatchToProps = (dispatch) => {
+    return {
+        renameCard: bindActionCreators(renameCard, dispatch)
+    }
+}
+export default connect(stateToProps, dispatchToProps)(CardModalTitel);

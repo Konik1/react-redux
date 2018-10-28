@@ -1,6 +1,10 @@
 import React from 'react'
 import {Button, Modal, FormGroup, FormControl} from 'react-bootstrap'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { addLogin } from '../store/actions'
+
 class Authorization extends React.Component{
 
     constructor(props, context) {
@@ -60,4 +64,14 @@ class Authorization extends React.Component{
         )
     }
 }
-export default Authorization;
+export const stateToProps = (state) =>{
+    return {
+        loginState: state.loginReducer
+    }
+}
+export const dispatchToProps = (dispatch) => {
+    return {
+        addLogin: bindActionCreators(addLogin, dispatch)
+    }
+}
+export default connect(stateToProps, dispatchToProps)(Authorization);

@@ -1,6 +1,10 @@
 import React from 'react'
 import {Button, FormGroup, FormControl} from 'react-bootstrap'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { changeCardDescription } from '../store/actions'
+
 class CardModalDescription extends React.Component{
 
     state={
@@ -77,4 +81,14 @@ class CardModalDescription extends React.Component{
         }
     }
 }
-export default CardModalDescription;
+export const stateToProps = (state) =>{
+    return {
+        cardsState: state.cardReducer
+    }
+}
+export const dispatchToProps = (dispatch) => {
+    return {
+        changeCardDescription: bindActionCreators(changeCardDescription, dispatch)
+    }
+}
+export default connect(stateToProps, dispatchToProps)(CardModalDescription);

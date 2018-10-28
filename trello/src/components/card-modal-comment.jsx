@@ -1,11 +1,15 @@
 import React from 'react'
 import {Button, FormGroup, FormControl} from 'react-bootstrap'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { addComment, changeComment, deleteComment } from '../store/actions'
+
 class CardModalComment extends React.Component{
 
     state={
         comment: "",
-        changeComment: "",
+        cgComment: "",
         visible: false,
     }
 
@@ -15,15 +19,15 @@ class CardModalComment extends React.Component{
     }
     addComment = () => {
         const { comment } = this.state;
-        const { cardId, login, addComment } = this.props;
-        addComment(login[0].login, comment, cardId)
+        const { cardId, loginState, addComment } = this.props;
+        addComment(loginState.loginObj[0].login, comment, cardId)
         this.setState({ comment: "" })
     }
 
     changeComment = (index) => {
-        const { changeComment } = this.state
+        const { cgComment } = this.state
         const { changeComment } = this.props
-        changeComment(changeComment, index)
+        changeComment(cgComment, index)
         this.setState({ comment: "", visible: false })
     }
     changeCommentOpen = () => {
@@ -34,12 +38,12 @@ class CardModalComment extends React.Component{
         deleteComment(index)
     }
     render(){
-        const { comment, visible, changeComment } = this.state
-        const { cardComments, cardId } = this.props
+        const { comment, visible, cgComment } = this.state
+        const { cardCommentsState, cardId } = this.props
         return(
             <div className="comments">
                 <div>
-                    {cardComments.map((comment, index) => { 
+                    {cardCommentsState.cardComments.map((comment, index) => { 
                         if (cardId === comment.idCard){
                             return(
                                 <div key={comment.id}>
@@ -48,8 +52,8 @@ class CardModalComment extends React.Component{
                                         <FormGroup className="comments-form">
                                             <FormControl type="text"
                                                        
-                                                        name="changeComment"
-                                                        value={changeComment}
+                                                        name="cgComment"
+                                                        value={cgComment}
                                                         onChange={this.handleChange}
                                             />
                                         </FormGroup>
@@ -94,4 +98,17 @@ class CardModalComment extends React.Component{
         )
     }
 }
-export default CardModalComment;
+export const stateToProps = (state) =>{
+    return {
+        cardCommentsState: state.commentReducer,
+        loginState: state.loginReducer
+    }
+}
+export const dispatchToProps = (dispatch) => {
+    return {
+        addComment: bindActionCreators(addComment, dispatch),
+        changeComment: bindActionCreators(changeComment, dispatch),
+        deleteComment: bindActionCreators(deleteComment, dispatch)
+    }
+}
+export default connect(stateToProps, dispatchToProps)(CardModalComment)

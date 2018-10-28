@@ -3,7 +3,11 @@ import './css/column.css';
 import CardList from './cardList'
 import {Button, FormGroup, FormControl} from 'react-bootstrap'
 
- 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { renameColumns, deleteColumns, addNewCard } from '../store/actions'
+
+
 /* const cards = JSON.parse(localStorage.getItem('cards')) */
 /* const columns= JSON.parse(localStorage.getItem("columns")) */
 
@@ -25,9 +29,9 @@ class Column extends React.Component{
     }
     addNewCard = e => { 
         e.preventDefault()
-        const { addNewCard, columnId, login } = this.props
+        const { addNewCard, columnId, loginState } = this.props
         const { titleCard } = this.state;
-        addNewCard(titleCard, columnId, login[0].login)
+        addNewCard(titleCard, columnId, loginState.loginObj[0].login)
         this.setState({ visibleAddCard: false, titleCard: "" })
     }
     renameTitleOpen = e => {
@@ -52,7 +56,7 @@ class Column extends React.Component{
     }
     render(){ 
         const { visibleAddCard, visibleRenameTitle, titleCard, titleColumn } = this.state;
-        const { cards, columnId, nameColumn, cardDescription, cardComments } = this.props
+        const { cardsState, columnId, nameColumn } = this.props
         return(
           <div className="column column-width">
             {!visibleRenameTitle && (
@@ -86,18 +90,9 @@ class Column extends React.Component{
                 </div>
             )}
             <CardList 
-                cards={cards}
                 columnId={columnId}
-                cardDescription={cardDescription}
-                cardComments={cardComments}
                 nameColumn={nameColumn}
-                login={this.props.login}
-                onRemoveCard={this.props.onRemoveCard.bind(this)}
-                onRenameCardTitle={this.props.onRenameCardTitle}
-                onChangeCardDescription={this.props.onChangeCardDescription}
-                onAddComment={this.props.onAddComment}
-                onRemoveComment={this.props.onRemoveComment}
-                onChangeComment={this.props.onChangeComment}
+                cards={cardsState.cards}
             />
             
             {visibleAddCard && (
@@ -132,4 +127,18 @@ class Column extends React.Component{
     }
 }
 
-export default Column;
+export const stateToProps = (state) =>{
+    return {
+        columnsState: state.columnReducer,
+        loginState: state.loginReducer,
+        cardsState: state.cardReducer
+    }
+}
+export const dispatchToProps = (dispatch) => {
+    return {
+        renameColumns: bindActionCreators(renameColumns, dispatch),
+        deleteColumns: bindActionCreators(deleteColumns, dispatch),
+        addNewCard: bindActionCreators(addNewCard, dispatch)
+    }
+}
+export default connect(stateToProps, dispatchToProps)(Column)

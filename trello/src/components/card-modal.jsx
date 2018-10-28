@@ -12,7 +12,7 @@ class CardModal extends React.Component{
     }
 
     render() {
-        const { show, cardName, cardLogin, cardDescription, cardId, cardIndex, cardComments,nameColumn } = this.props
+        const { show, cardName, cardLogin, cardDescription, cardId, cardIndex, nameColumn } = this.props
         return (
             <div>
                 <Modal show={show} onHide={this.handleClose}>
@@ -21,7 +21,6 @@ class CardModal extends React.Component{
                             <div className="title-card"><CardModalTitel
                                 cardName={cardName}
                                 cardIndex={cardIndex}
-                                onRenameCardTitle={this.props.onRenameCardTitle}
                             /></div>
                         </Modal.Title>
                     </Modal.Header>
@@ -32,21 +31,15 @@ class CardModal extends React.Component{
                             <div className="right-card-text">Колонка: {nameColumn}</div>
                         </div>
                         <div>
-                            <div key={card.idCard}>
+                            <div key={cardId}>
                             <CardModalDescription 
                                 description={cardDescription}
                                 cardIndex={cardIndex}
-                                onChangeCardDescription={this.props.onChangeCardDescription}
                             />
                             </div>
                         <div className="comments-title">Комментарии:</div>
                         <CardModalComment
-                            cardComments={cardComments}
                             cardId={cardId}
-                            onAddComment={this.props.onAddComment}
-                            login={this.props.login}
-                            onRemoveComment={this.props.onRemoveComment}
-                            onChangeComment={this.props.onChangeComment}
                         />
                         </div>
                         

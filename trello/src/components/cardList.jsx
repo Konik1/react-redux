@@ -5,7 +5,7 @@ import Card from './card'
 class CardList extends React.Component{
     
     render(){
-        const { cards, columnId, cardComments, nameColumn } = this.props
+        const { cards, columnId, nameColumn } = this.props
         return(
             <div>
                 {cards.map((card, index) => {
@@ -17,16 +17,8 @@ class CardList extends React.Component{
                             cardId={card.id}
                             cardLogin={card.login}
                             cardDescription={card.description}
-                            cardComments={cardComments}
                             nameColumn={nameColumn}
-                            onRemoveCard={this.props.onRemoveCard.bind(this)}
                             cardIndex={index}
-                            login={this.props.login}
-                            onRenameCardTitle={this.props.onRenameCardTitle}
-                            onChangeCardDescription={this.props.onChangeCardDescription}
-                            onAddComment={this.props.onAddComment}
-                            onRemoveComment={this.props.onRemoveComment}
-                            onChangeComment={this.props.onChangeComment}
                         />
                         </div>
                     )
