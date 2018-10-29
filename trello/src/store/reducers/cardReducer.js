@@ -1,7 +1,8 @@
 import { ADD_NEW_CARD,
     RENAME_CARD,
     DELETE_CARD,
-    CHANGE_CARD_DESCRIPTION } from '../actions';
+    CHANGE_CARD_DESCRIPTION,
+    DELETE_CARDS_IN_COLUMN } from '../actions';
 
 const initialState = {
     cards: JSON.parse(localStorage.getItem('cards'))
@@ -32,6 +33,19 @@ export const cardReducer = (state = initialState, action) => {
             let serialObj5 = JSON.stringify(cards);
             localStorage.setItem('cards', serialObj5);
             return { ...state, cards: cards };}
+        
+        case DELETE_CARDS_IN_COLUMN:{
+            const { cards } = state;
+            for ( let i=0; i < cards.length; i++ ) {
+                if ( action.columnId === cards[i].idColumn ){
+                    cards.splice( i, 1 );
+                    i= i-1;
+                }
+            }
+            let serialObj6 = JSON.stringify(cards);
+            localStorage.setItem('cards', serialObj6);
+            return { ...state, cards: cards };
+        }
 
         case DELETE_CARD:
             {const { cards } = state;
@@ -39,7 +53,7 @@ export const cardReducer = (state = initialState, action) => {
             let serialObj6 = JSON.stringify(cards2);
             localStorage.setItem('cards', serialObj6);
             return { ...state, cards: cards2 };
-}
+        }
         case CHANGE_CARD_DESCRIPTION:
             {const { cards } = state;
             cards[action.cardIndex].description = action.description;

@@ -15,8 +15,8 @@ export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 export const ADD_LOGIN = 'ADD_LOGIN'
 
-
-
+export const DELETE_CARDS_IN_COLUMN = 'DELETE_CARDS_IN_COLUMN'
+export const DELETE_COMMENTS_IN_CARD = 'DELETE_COMMENTS_IN_CARD'
 
 /* export const CHANGE_CARDS = 'CHANGE_CARDS'
 export const CHANGE_CARD_DESCRIPTION = 'CHANGE_CARD_DESCRIPTION'
@@ -36,10 +36,16 @@ export const renameColumns = (titleColumn, columnIndex) => {
         columnIndex: columnIndex
     }
 }
-export const deleteColumns = (columnIndex) => {
-    return {
-        type: DELETE_COLUMNS,
-        columnIndex
+export function deleteColumns (columnIndex, columnId){
+    return dispatch => {
+        dispatch({
+            type: DELETE_CARDS_IN_COLUMN,
+            columnId
+        })
+        dispatch({
+            type: DELETE_COLUMNS,
+            columnIndex
+        })
     }
 }
 export const addNewCard = (titleCard, columnId, login) => {
@@ -57,10 +63,21 @@ export const renameCard = (cardTitle, cardIndex) => {
         cardIndex: cardIndex
     }
 }
-export const deleteCard = (cardIndex, cardId) => {
+export function deleteCard (cardIndex, cardId){
+    return dispatch => {
+        dispatch({
+            type: DELETE_COMMENTS_IN_CARD,
+            cardId
+        })
+        dispatch({
+            type: DELETE_CARD,
+            cardIndex
+        })
+    }
+}
+export const deleteCommentsInCard = (cardId) => {
     return {
-        type: DELETE_CARD,
-        cardIndex, 
+        type: DELETE_COMMENTS_IN_CARD,
         cardId
     }
 }

@@ -5,7 +5,7 @@ import {Button, FormGroup, FormControl} from 'react-bootstrap'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { renameColumns, deleteColumns, addNewCard } from '../store/actions'
+import { renameColumns, deleteColumns, addNewCard, deleteCommentsInCard } from '../store/actions'
 
 
 /* const cards = JSON.parse(localStorage.getItem('cards')) */
@@ -51,8 +51,15 @@ class Column extends React.Component{
         this.setState({ [name]: e.currentTarget.value })
     }
     deleteColumn = () => {
-        const { columnIndex, deleteColumns } = this.props
-        deleteColumns(columnIndex)
+        const { cardsState, columnIndex, columnId, deleteColumns, deleteCommentsInCard } = this.props
+        
+        cardsState.cards.map((card) => {
+            if ( columnId === card.idColumn ){
+                deleteCommentsInCard(card.id)
+            }
+           
+        })
+        deleteColumns(columnIndex, columnId)
     }
     render(){ 
         const { visibleAddCard, visibleRenameTitle, titleCard, titleColumn } = this.state;
@@ -138,7 +145,8 @@ export const dispatchToProps = (dispatch) => {
     return {
         renameColumns: bindActionCreators(renameColumns, dispatch),
         deleteColumns: bindActionCreators(deleteColumns, dispatch),
-        addNewCard: bindActionCreators(addNewCard, dispatch)
+        addNewCard: bindActionCreators(addNewCard, dispatch),
+        deleteCommentsInCard: bindActionCreators(deleteCommentsInCard, dispatch)
     }
 }
 export default connect(stateToProps, dispatchToProps)(Column)
