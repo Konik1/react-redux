@@ -1,4 +1,34 @@
-import { ADD_COLUMNS, DELETE_COLUMNS, RENAME_COLUMNS } from '../actions';
+const ADD_COLUMNS = 'ADD_COLUMNS'
+const RENAME_COLUMNS = 'RENAME_COLUMNS'
+const DELETE_COLUMNS = 'DELETE_COLUMNS'
+
+const DELETE_CARDS_IN_COLUMN = 'DELETE_CARDS_IN_COLUMN'
+
+export const addColumns = (columns) => {
+    return {
+        type: ADD_COLUMNS,
+        payload: columns
+    }
+}
+export const renameColumns = (titleColumn, columnIndex) => {
+    return {
+        type: RENAME_COLUMNS,
+        titleColumn: titleColumn, 
+        columnIndex: columnIndex
+    }
+}
+export function deleteColumns (columnIndex, columnId){
+    return dispatch => {
+        dispatch({
+            type: DELETE_CARDS_IN_COLUMN,
+            columnId
+        })
+        dispatch({
+            type: DELETE_COLUMNS,
+            columnIndex
+        })
+    }
+}
 
 const initialState = {
     columns: JSON.parse(localStorage.getItem('columns'))

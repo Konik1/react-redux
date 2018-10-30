@@ -1,9 +1,10 @@
 import React from 'react'
 import {Button, FormGroup, FormControl} from 'react-bootstrap'
+import PropTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { addComment, changeComment, deleteComment } from '../store/actions'
+import { addComment, changeComment, deleteComment } from '../store/reducers/commentReducer'
 
 class CardModalComment extends React.Component{
 
@@ -98,6 +99,17 @@ class CardModalComment extends React.Component{
         )
     }
 }
+
+CardModalComment.propTypes = {
+    cardCommentsState: PropTypes.object,
+    loginState: PropTypes.object,
+    addComment: PropTypes.func,
+    changeComment: PropTypes.func,
+    deleteComment: PropTypes.func,
+
+    cardId: PropTypes.number
+}
+
 export const stateToProps = (state) =>{
     return {
         cardCommentsState: state.commentReducer,

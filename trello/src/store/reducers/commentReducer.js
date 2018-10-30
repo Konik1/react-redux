@@ -1,7 +1,30 @@
-import { ADD_COMMENT,
-    CHANGE_COMMENT,
-    DELETE_COMMENT,
-    DELETE_COMMENTS_IN_CARD } from '../actions';
+const ADD_COMMENT = 'ADD_COMMENT'
+const CHANGE_COMMENT = 'CHANGE_COMMENT'
+const DELETE_COMMENT = 'DELETE_COMMENT'
+
+const DELETE_COMMENTS_IN_CARD = 'DELETE_COMMENTS_IN_CARD'
+
+export const addComment = (login, comment, cardId) => {
+    return {
+        type: ADD_COMMENT,
+        login, 
+        comment, 
+        cardId
+    }
+}
+export const changeComment = (comment, index) => {
+    return {
+        type: CHANGE_COMMENT,
+        comment, 
+        index
+    }
+}
+export const deleteComment = (indexComment) => {
+    return {
+        type: DELETE_COMMENT,
+        indexComment
+    }
+}
 
 const initialState = {
     cardComments: JSON.parse(localStorage.getItem('cardComments'))

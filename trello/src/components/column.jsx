@@ -2,14 +2,12 @@ import React from 'react'
 import './css/column.css';
 import CardList from './cardList'
 import {Button, FormGroup, FormControl} from 'react-bootstrap'
+import PropTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { renameColumns, deleteColumns, addNewCard, deleteCommentsInCard } from '../store/actions'
-
-
-/* const cards = JSON.parse(localStorage.getItem('cards')) */
-/* const columns= JSON.parse(localStorage.getItem("columns")) */
+import { renameColumns, deleteColumns } from '../store/reducers/columnReducer'
+import { addNewCard, deleteCommentsInCard } from '../store/reducers/cardReducer'
 
 class Column extends React.Component{
     
@@ -132,6 +130,20 @@ class Column extends React.Component{
           </div>
         )
     }
+}
+
+Column.propTypes = {
+    columnsState: PropTypes.object,
+    loginState: PropTypes.object,
+    cardsState: PropTypes.object,
+    renameColumns: PropTypes.func,
+    deleteColumns: PropTypes.func,
+    addNewCard: PropTypes.func,
+    deleteCommentsInCard: PropTypes.func,
+
+    columnIndex: PropTypes.number,
+    nameColumn: PropTypes.string,
+    columnId: PropTypes.number
 }
 
 export const stateToProps = (state) =>{

@@ -1,8 +1,52 @@
-import { ADD_NEW_CARD,
-    RENAME_CARD,
-    DELETE_CARD,
-    CHANGE_CARD_DESCRIPTION,
-    DELETE_CARDS_IN_COLUMN } from '../actions';
+const ADD_NEW_CARD = 'ADD_NEW_CARD'
+const RENAME_CARD = 'RENAME_CARD'
+const DELETE_CARD = 'DELETE_CARD'
+const CHANGE_CARD_DESCRIPTION = 'CHANGE_CARD_DESCRIPTION'
+
+const DELETE_CARDS_IN_COLUMN = 'DELETE_CARDS_IN_COLUMN' 
+
+const DELETE_COMMENTS_IN_CARD = 'DELETE_COMMENTS_IN_CARD'
+
+export const addNewCard = (titleCard, columnId, login) => {
+    return {
+        type: ADD_NEW_CARD,
+        titleCard: titleCard,
+        columnId: columnId,
+        login: login
+    }
+}
+export const renameCard = (cardTitle, cardIndex) => {
+    return {
+        type: RENAME_CARD,
+        cardTitle: cardTitle, 
+        cardIndex: cardIndex
+    }
+}
+export function deleteCard (cardIndex, cardId){
+    return dispatch => {
+        dispatch({
+            type: DELETE_COMMENTS_IN_CARD,
+            cardId
+        })
+        dispatch({
+            type: DELETE_CARD,
+            cardIndex
+        })
+    }
+}
+export const deleteCommentsInCard = (cardId) => {
+    return {
+        type: DELETE_COMMENTS_IN_CARD,
+        cardId
+    }
+}
+export const changeCardDescription = (description, cardIndex) => {
+    return {
+        type: CHANGE_CARD_DESCRIPTION,
+        description,
+        cardIndex
+    }
+}
 
 const initialState = {
     cards: JSON.parse(localStorage.getItem('cards'))

@@ -2,24 +2,17 @@ import React from 'react'
 import './css/card.css';
 import CardModal from './card-modal'
 import {Button} from 'react-bootstrap'
+import PropTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { deleteCard } from '../store/actions'
+import { deleteCard } from '../store/reducers/cardReducer'
 
 class Card extends React.Component{
     
     state={
         show: false,
     }
-    /* deleteCard = e => {
-        e.preventDefault()
-        const { data } = this.props;
-        const cards = JSON.parse(localStorage.getItem('cards'));
-        cards.splice(data.index, 1);
-        const serialObj= JSON.stringify(cards);
-        localStorage.setItem('cards', serialObj);
-    } */
     handleDeleteCard = () => {
         const { cardIndex, cardId, deleteCard } = this.props
         deleteCard(cardIndex, cardId)
@@ -58,6 +51,19 @@ class Card extends React.Component{
     }
 
 }
+
+Card.propTypes = {
+    cardsState: PropTypes.object,
+    deleteCard: PropTypes.func,
+
+    cardName: PropTypes.string,
+    cardId: PropTypes.number,
+    cardLogin: PropTypes.string,
+    cardDescription: PropTypes.string,
+    nameColumn: PropTypes.string,
+    cardIndex: PropTypes.number
+}
+
 export const stateToProps = (state) =>{
     return {
         cardsState: state.cardReducer

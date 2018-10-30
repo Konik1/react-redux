@@ -1,4 +1,11 @@
-import { ADD_LOGIN } from '../actions';
+const ADD_LOGIN = 'ADD_LOGIN'
+
+export const addLogin = (login) => {
+    return {
+        type: ADD_LOGIN,
+        login
+    }
+}
 
 const initialState = {
     loginObj: JSON.parse(localStorage.getItem('loginObj'))

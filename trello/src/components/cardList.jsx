@@ -1,6 +1,7 @@
 import React from 'react'
 import './css/cardList.css';
 import Card from './card'
+import PropTypes from 'prop-types';
 
 class CardList extends React.Component{
     
@@ -30,4 +31,11 @@ class CardList extends React.Component{
         )
     }
 }
+
+CardList.propTypes = {
+    columnId: PropTypes.number,
+    nameColumn: PropTypes.string,
+    cards: PropTypes.array
+}
+
 export default CardList;

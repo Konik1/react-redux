@@ -1,9 +1,10 @@
 import React from 'react'
 import {Button, FormGroup, FormControl} from 'react-bootstrap'
+import PropTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { changeCardDescription } from '../store/actions'
+import { changeCardDescription } from '../store/reducers/cardReducer'
 
 class CardModalDescription extends React.Component{
 
@@ -81,6 +82,15 @@ class CardModalDescription extends React.Component{
         }
     }
 }
+
+CardModalDescription.propTypes = { 
+    cardsState: PropTypes.object,
+    changeCardDescription: PropTypes.func,
+
+    description: PropTypes.string,
+    cardIndex: PropTypes.nimber
+}
+
 export const stateToProps = (state) =>{
     return {
         cardsState: state.cardReducer

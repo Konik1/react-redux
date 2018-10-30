@@ -1,9 +1,10 @@
 import React from 'react'
 import {Button, Modal, FormGroup, FormControl} from 'react-bootstrap'
+import PropTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { addLogin } from '../store/actions'
+import { addLogin } from '../store/reducers/loginReducer'
 
 class Authorization extends React.Component{
 
@@ -64,6 +65,11 @@ class Authorization extends React.Component{
         )
     }
 }
+
+Authorization.propTypes = {
+    addLogin: PropTypes.func
+}
+
 export const stateToProps = (state) =>{
     return {
         loginState: state.loginReducer

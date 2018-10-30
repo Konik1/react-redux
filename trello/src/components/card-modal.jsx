@@ -4,6 +4,7 @@ import {Button, Modal} from 'react-bootstrap'
 import CardModalTitel from './card-modal-titel'
 import CardModalDescription from './card-modal-description'
 import CardModalComment from './card-modal-comment'
+import PropTypes from 'prop-types';
 
 class CardModal extends React.Component{
 
@@ -53,4 +54,16 @@ class CardModal extends React.Component{
         );
     }
 }
+
+CardModal.propTypes = {
+    cardDescription: PropTypes.string,
+    cardId: PropTypes.number,
+    cardLogin: PropTypes.string,
+    cardIndex: PropTypes.number,
+    show: PropTypes.bool,
+    cardName: PropTypes.string,
+    nameColumn: PropTypes.string,
+    handleClose: PropTypes.func
+}
+
 export default CardModal;
